@@ -56,8 +56,8 @@ def send_invite(from_address, to_address, bridge_date, description = "", subject
     
     # replaced_contents = replaced_contents.replace('startTrigger', "-PT{0}H".format(1))
 
-    # part_email = MIMEText(description,'calendar;method=REQUEST')
-    part_email = MIMEText(replaced_contents,'calendar;method=REQUEST')
+    part_email = MIMEText(description,'calendar;method=REQUEST')
+    # part_email = MIMEText(replaced_contents,'calendar;method=REQUEST')
     
     msgAlternative = MIMEMultipart('alternative')
     
