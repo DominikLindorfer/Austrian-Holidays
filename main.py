@@ -4,7 +4,7 @@
 @File    :   main.py
 @Time    :   2022/09/16 08:28:10
 @Author  :   Dominik Lindorfer 
-@Contact :   dominik.lindorfer@posteo.at
+@Contact :   d.lindorfer@3bg.at
 @License :   (C)Copyright
 @Version :   0.1
 @Descr   :   Calculate which Austrian Holidays take place on Weekdays or Weekends
@@ -23,6 +23,7 @@ import smtplib
 from email.utils import formatdate
 import os, sys
 import datetime
+import time
 # from workalendar.europe import Austria
 
 def send_invite(from_address, to_address, bridge_date, description = "", subject = "", smpt = None):
@@ -55,14 +56,15 @@ def send_invite(from_address, to_address, bridge_date, description = "", subject
     
     # replaced_contents = replaced_contents.replace('startTrigger', "-PT{0}H".format(1))
 
-    part_email = MIMEText(description,'calendar;method=REQUEST')
+    # part_email = MIMEText(description,'calendar;method=REQUEST')
+    part_email = MIMEText(replaced_contents,'calendar;method=REQUEST')
     
     msgAlternative = MIMEMultipart('alternative')
     
     ical_atch = MIMEBase('text/calendar',' ;name="%s"'%"invitation.ics")
     ical_atch.set_payload(replaced_contents)
     email.encoders.encode_base64(ical_atch)
-    ical_atch.add_header('Content-Disposition', 'attachment; filename="Reminder.ics"')
+    ical_atch.add_header('Content-Disposition', "attachment; filename=Reminder"+str(bridge_date)+".ics")
     
     msgAlternative.attach(part_email)
     msgAlternative.attach(ical_atch)
@@ -126,11 +128,16 @@ def send_email_reminders(all_bridgedays, config):
     for item in all_bridgedays[str(config["year"])]:
         
         bridge_date = item[0]
+
+        bridge_date = bridge_date + timedelta(days=1)
+
         holiday_name = item[1]
 
         subject = "Bitte freinehmen fuer: " + str(bridge_date) + "!"
-        description = "Am " + str(bridge_date) + " ist ein Zwickeltag (" + holiday_name + ")! Bitte freinehmen!"
+        description = "Am " + str(bridge_date) + " ist ein Zwickeltag (Tag nach " + holiday_name + ")! Bitte freinehmen!"
         send_invite(to_address=config["to_address"], from_address=config["from_address"], bridge_date=bridge_date, description=description, subject=subject, smpt=smpt)
+
+        time.sleep(2)
 
     smpt.quit()
 
@@ -139,9 +146,9 @@ if __name__ == "__main__":
     bridge_days = get_holidays(print_holidays=False)
 
     config = {
-                "to_address" : "dominik.lindorfer@posteo.at",
-                "from_address" : "Zwickeltag Reminder <dominik.lindorfer@posteo.at>",
-                "smpt" : None,
+                "to_address" : "d.lindorfer@3bg.at",
+                "from_address" : "Risk Miscellaneous Bot <no-reply@3bg.at>",
+                "smpt" : smtplib.SMTP("smtpmail.euro.dreibanken.at",25),
                 "year" : 2023
     }
 
