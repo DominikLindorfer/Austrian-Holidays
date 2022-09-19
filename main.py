@@ -141,7 +141,7 @@ if __name__ == "__main__":
     config = {
                 "to_address" : "d.lindorfer@3bg.at",
                 "from_address" : "Risk Miscellaneous Bot <no-reply@3bg.at>",
-                "smpt" : smtplib.SMTP("smtpmail.euro.dreibanken.at",25)
+                "smpt" : None
     }
 
     send_email_reminders(bridge_days, config)
