@@ -141,7 +141,7 @@ def send_email_reminders(all_bridgedays, config):
 
 if __name__ == "__main__":
 
-    bridge_days = get_holidays(print_holidays=False)
+    bridge_days = get_holidays(print_holidays=True)
 
     config = {
                 "to_address" : "dominik.lindorfer@posteo.at",
