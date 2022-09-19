@@ -4,7 +4,7 @@
 @File    :   main.py
 @Time    :   2022/09/16 08:28:10
 @Author  :   Dominik Lindorfer 
-@Contact :   dominik.lindorfer@posteo.at
+@Contact :   d.lindorfer@3bg.at
 @License :   (C)Copyright
 @Version :   0.1
 @Descr   :   Calculate which Austrian Holidays take place on Weekdays or Weekends
@@ -123,7 +123,7 @@ def send_email_reminders(all_bridgedays, config):
 
     smpt = config["smpt"]
 
-    for item in all_bridgedays["2022"]:
+    for item in all_bridgedays[str(config["year"])]:
         
         bridge_date = item[0]
         holiday_name = item[1]
@@ -139,9 +139,10 @@ if __name__ == "__main__":
     bridge_days = get_holidays(print_holidays=False)
 
     config = {
-                "to_address" : "dominik.lindorfer@posteo.at",
-                "from_address" : "Zwickeltag Reminder <dominik.lindorfer@posteo.at>",
-                "smpt" : None
+                "to_address" : "d.lindorfer@3bg.at",
+                "from_address" : "Risk Miscellaneous Bot <no-reply@3bg.at>",
+                "smpt" : smtplib.SMTP("smtpmail.euro.dreibanken.at",25),
+                "year" : 2022
     }
 
     send_email_reminders(bridge_days, config)
