@@ -10,13 +10,11 @@
 @Descr   :   Calculate which Austrian Holidays take place on Weekdays or Weekends
 '''
 from calendar import weekday
-import pandas as pd
 from datetime import date, timedelta
 import holidays
 import email as email
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.mime.image import MIMEImage
 from email.mime.base import MIMEBase
 import email.encoders
 import smtplib
