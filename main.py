@@ -149,5 +149,6 @@ if __name__ == "__main__":
                 "smpt" : None,
                 "year" : 2023
     }
-
-    send_email_reminders(bridge_days, config)
+    
+    if config["smpt"] is not None:
+        send_email_reminders(bridge_days, config)
