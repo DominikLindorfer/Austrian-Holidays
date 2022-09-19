@@ -4,7 +4,7 @@
 @File    :   main.py
 @Time    :   2022/09/16 08:28:10
 @Author  :   Dominik Lindorfer 
-@Contact :   d.lindorfer@3bg.at
+@Contact :   dominik.lindorfer@posteo.at
 @License :   (C)Copyright
 @Version :   0.1
 @Descr   :   Calculate which Austrian Holidays take place on Weekdays or Weekends
@@ -139,8 +139,8 @@ if __name__ == "__main__":
     bridge_days = get_holidays(print_holidays=False)
 
     config = {
-                "to_address" : "d.lindorfer@3bg.at",
-                "from_address" : "Risk Miscellaneous Bot <no-reply@3bg.at>",
+                "to_address" : "dominik.lindorfer@posteo.at",
+                "from_address" : "Zwickeltag Reminder <dominik.lindorfer@posteo.at>",
                 "smpt" : None
     }
 
