@@ -97,7 +97,12 @@ def get_holidays(year_range = 19, print_holidays = True):
                 weekdays += 1
                 # print("Weekday: ", holiday)
 
-            if holiday[0].weekday() == 3:
+            if holiday[0].weekday() == 3: # Fridays
+                # print("Bridgeday: ", holiday)
+                zwickeltage += 1
+                bridgedays.append(holiday)
+                
+            if holiday[0].weekday() == 1: # Mondays
                 # print("Bridgeday: ", holiday)
                 zwickeltage += 1
                 bridgedays.append(holiday)
